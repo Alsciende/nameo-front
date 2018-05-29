@@ -5,6 +5,9 @@ import createPersistedState from 'vuex-persistedstate';
 import * as getters from './getters';
 import * as mutations from './mutations';
 
+import timer from './modules/timer';
+import cards from './modules/cards';
+
 Vue.use(Vuex);
 
 const debug = process.env.NODE_ENV !== 'production';
@@ -16,6 +19,8 @@ export default new Vuex.Store({
   getters,
   mutations,
   modules: {
+    timer,
+    cards,
   },
   strict: debug,
   plugins: [
