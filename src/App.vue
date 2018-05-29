@@ -1,19 +1,42 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>Page {{ page }}</h1>
+    <p>
+      <button @click="changePage">Change Page</button>
+    </p>
+    <component v-bind:is="currentComponent"></component>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import HelloWorld from './components/HelloWorld.vue';
+import GoodbyeWorld from './components/GoodbyeWorld.vue';
+
+const pages = {
+  1: 'hello-world',
+  2: 'goodbye-world',
+};
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
-  }
-}
+    HelloWorld,
+    GoodbyeWorld,
+  },
+  computed: {
+    page() {
+      return this.$store.getters.page;
+    },
+    currentComponent() {
+      return pages[this.page];
+    },
+  },
+  methods: {
+    changePage() {
+      this.$store.commit('changePage');
+    },
+  },
+};
 </script>
 
 <style>
