@@ -1,0 +1,52 @@
+@startuml
+start
+partition StartOfGame {
+:Get Number of Players<
+:Get Number of Teams<
+:Get Game Difficulty<
+}
+repeat
+  partition StartOfPhase {
+  :Display Phase Rules>
+  :Empty All Piles;
+  :Shuffle All Cards into Draw Pile;
+  :Select First Player;
+  }
+  repeat
+    partition StartOfTurn {
+    :Display Player Name>
+    :Start Timer;
+    }
+    partition Turn {
+    repeat
+      :Remove First Card from Draw Pile;
+      :Display Card>
+      split
+        :Success<
+        :Add Card to Won Pile;
+      split again
+        :Failure<
+        :Add Card to Lost Pile;
+      endsplit
+    repeat while (time out or draw empty) is (no)
+    }
+    partition EndOfTurn {
+    :End Timer;
+    :Display Turn Results>
+    :Append Won Pile to Team Pile;
+    :Shuffle Lost Pile;
+    :Append Lost Pile to Draw Pile;
+    :Select Next Player;
+    }
+  repeat while (draw empty) is (no)
+  partition EndOfPhase {
+  :Display Phase Results>
+  :Increment Phase Counter;
+  }
+repeat while (phase > 3) is (no)
+partition EndOfGame {
+:Find Winning Team;
+:Display Game Results>
+}
+stop
+@enduml

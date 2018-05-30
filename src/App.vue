@@ -6,17 +6,21 @@
 </template>
 
 <script>
-  import BeforeTurn from './components/BeforeTurn.vue';
-  import Turn from './components/Turn.vue';
-  import AfterTurn from './components/AfterTurn.vue';
+  import StartOfPhase from './components/StartOfPhase';
+  import EndOfPhase from './components/EndOfPhase';
+  import BeforeTurn from './components/BeforeTurn';
+  import Turn from './components/Turn';
+  import AfterTurn from './components/AfterTurn';
   import { mapGetters } from 'vuex';
 
   export default {
     name: 'app',
     components: {
+      StartOfPhase,
       BeforeTurn,
       Turn,
       AfterTurn,
+      EndOfPhase,
     },
     computed: {
       ...mapGetters('router', [
@@ -24,9 +28,7 @@
       ]),
     },
     mounted() {
-      this.$store.commit('cards/reset');
-      this.$store.commit('cards/begin');
-      this.$store.commit('router/change', 'before-turn');
+      this.$store.commit('router/change', 'start-of-phase');
     },
   };
 </script>
