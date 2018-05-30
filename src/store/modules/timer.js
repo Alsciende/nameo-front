@@ -1,10 +1,17 @@
 // actions
 const actions = {
-  start({ commit }, duration) {
+  start({ commit, dispatch }, duration) {
     commit('start', {
       duration,
-      callback: () => commit('tick'),
+      callback: () => dispatch('tick'),
     });
+  },
+  tick({ commit, getters }) {
+    commit('tick');
+
+    if (getters.timer === 0) {
+      commit('router/change', 'after-turn', { root: true });
+    }
   },
 };
 
