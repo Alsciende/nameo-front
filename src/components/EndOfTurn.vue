@@ -1,17 +1,17 @@
 <template>
     <div>
         <p>
-            <button @click="next">Next Phase</button>
+            <button @click="next">Continue</button>
         </p>
     </div>
 </template>
 
 <script>
   export default {
-    name: "EndOfPhase",
+    name: "EndOfTurn",
     methods: {
       next() {
-        this.$store.dispatch('PhaseEnds');
+        this.$store.dispatch('TurnEnds');
       },
     },
   };

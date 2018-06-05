@@ -17,7 +17,7 @@ const mutations = {
 export default {
   namespaced: true,
   state: {
-    route: 'before-turn',
+    route: 'start-of-turn',
   },
   getters,
   actions,

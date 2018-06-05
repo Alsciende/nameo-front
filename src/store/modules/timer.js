@@ -6,11 +6,11 @@ const actions = {
       callback: () => dispatch('tick'),
     });
   },
-  tick({ commit, getters }) {
+  tick({ dispatch, commit, getters }) {
     commit('tick');
 
-    if (getters.timer === 0) {
-      commit('router/change', 'after-turn', { root: true });
+    if (getters.done) {
+      dispatch('TimeIsOut', null, { root: true });
     }
   },
 };
@@ -18,6 +18,7 @@ const actions = {
 // getters
 const getters = {
   timer: state => state.duration - state.elapsed,
+  done: state => state.duration <= state.elapsed,
 };
 
 // mutations
@@ -30,9 +31,9 @@ const mutations = {
   },
   tick(state) {
     state.elapsed = Math.round((Date.now() - state.startedAt) / 1000);
-    if (state.elapsed >= state.duration) {
-      window.clearInterval(state.intervalID);
-    }
+  },
+  clear(state) {
+    window.clearInterval(state.intervalID);
   },
 };
 

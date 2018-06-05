@@ -8,18 +8,18 @@
 <script>
   import StartOfPhase from './components/StartOfPhase';
   import EndOfPhase from './components/EndOfPhase';
-  import BeforeTurn from './components/BeforeTurn';
+  import StartOfTurn from './components/StartOfTurn';
   import Turn from './components/Turn';
-  import AfterTurn from './components/AfterTurn';
+  import EndOfTurn from './components/EndOfTurn';
   import { mapGetters } from 'vuex';
 
   export default {
     name: 'app',
     components: {
       StartOfPhase,
-      BeforeTurn,
+      StartOfTurn,
       Turn,
-      AfterTurn,
+      EndOfTurn,
       EndOfPhase,
     },
     computed: {

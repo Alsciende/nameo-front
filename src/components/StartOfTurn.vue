@@ -1,6 +1,5 @@
 <template>
     <div>
-        Before Turn
         <p>
             <button @click="startTurn">Start Turn</button>
         </p>
@@ -9,11 +8,10 @@
 
 <script>
   export default {
-    name: "BeforeTurn",
+    name: "StartOfTurn",
     methods: {
       startTurn() {
-        this.$store.dispatch('timer/start', 10);
-        this.$store.commit('router/change', 'turn');
+        this.$store.dispatch('TurnStarts');
       },
     },
   };

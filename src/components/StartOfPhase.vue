@@ -1,6 +1,5 @@
 <template>
     <div>
-        Start of Phase
         <p>
             <button @click="next">Go</button>
         </p>
@@ -12,9 +11,7 @@
     name: "StartOfPhase",
     methods: {
       next() {
-        this.$store.commit('cards/reset');
-        this.$store.commit('cards/begin');
-        this.$store.commit('router/change', 'before-turn');
+        this.$store.dispatch('PhaseStarts');
       },
     },
   };

@@ -1,6 +1,5 @@
 <template>
     <div>
-        Turn
         <h2>{{ timer }}</h2>
         <p>
             <button @click="success">Success</button>
@@ -25,10 +24,10 @@
     },
     methods: {
       success() {
-        this.$store.dispatch('cards/success');
+        this.$store.dispatch('CardIsWon');
       },
       failure() {
-        this.$store.dispatch('cards/failure');
+        this.$store.dispatch('CardIsLost');
       },
     },
   };
