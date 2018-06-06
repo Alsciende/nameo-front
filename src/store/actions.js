@@ -1,6 +1,9 @@
-export const PhaseStarts = ({ commit }) => {
+export const PhaseStarts = ({ commit, getters }) => {
+  commit('players/randomizeOrder');
+  commit('cards/init', getters['players/teams']);
   commit('cards/reset');
   commit('router/change', 'start-of-turn');
+  commit('players/next');
 };
 
 export const TurnStarts = ({ dispatch, commit }) => {
@@ -39,8 +42,9 @@ export const TimeIsOut = ({ commit }) => {
 
 export const TurnEnds = ({ getters, commit }) => {
   commit('timer/clear');
-  commit('cards/clear', 'won');
-  commit('cards/shuffleInto', { from: 'lost', to: 'draw' });
+  commit('cards/appendWon', getters['players/currentTeam']);
+  commit('cards/shuffleLost');
+  commit('players/next');
   if (getters['cards/drawCount'] === 0) {
     commit('router/change', 'end-of-phase');
   } else {

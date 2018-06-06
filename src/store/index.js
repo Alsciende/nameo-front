@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import createPersistedState from 'vuex-persistedstate';
+// import createPersistedState from 'vuex-persistedstate';
 
 import * as getters from './getters';
 import * as mutations from './mutations';
@@ -8,6 +8,7 @@ import * as actions from './actions';
 
 import timer from './modules/timer';
 import cards from './modules/cards';
+import players from './modules/players';
 import router from './modules/router';
 
 Vue.use(Vuex);
@@ -23,13 +24,14 @@ export default new Vuex.Store({
   modules: {
     timer,
     cards,
+    players,
     router,
   },
   strict: debug,
   plugins: [
-    createPersistedState({
-      paths: [
-      ],
-    }),
+    // createPersistedState({
+    //   paths: [
+    //   ],
+    // }),
   ],
 });

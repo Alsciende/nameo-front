@@ -12,6 +12,9 @@ const getters = {
 
 // mutations
 const mutations = {
+  init(state, teams) {
+    state.teams = _.mapValues(teams, () => []);
+  },
   reset(state) {
     state.piles.lost = [];
     state.piles.won = [];
@@ -33,13 +36,13 @@ const mutations = {
     state.piles.lost.push(state.current);
     state.current = null;
   },
-  shuffleInto(state, { from, to }) {
-    state.piles[to] = state.piles[to].concat(shuffle(state.piles[from]));
-    state.piles[from] = [];
+  shuffleLost(state) {
+    state.piles.draw = state.piles.draw.concat(shuffle(state.piles.lost));
+    state.piles.lost = [];
   },
-  append(state, { from, to }) {
-    state.piles[to] = state.piles[to].concat(state.piles[from]);
-    state.piles[from] = [];
+  appendWon(state, team) {
+    state.teams[team] = state.teams[team].concat(state.piles.won);
+    state.piles.won = [];
   },
 };
 
@@ -60,6 +63,7 @@ export default {
       lost: [],
       won: [],
     },
+    teams: null,
     current: null,
   },
   getters,
