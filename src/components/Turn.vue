@@ -1,11 +1,12 @@
 <template>
     <div>
+        <h2>This is the turn of {{ currentPlayerName }}</h2>
         <h2>{{ timer }}</h2>
         <p>
             <button @click="success">Success</button>
             <button @click="failure">Failure</button>
         </p>
-        <h2>{{ current }}</h2>
+        <h2>{{ getCurrentCardName }}</h2>
     </div>
 </template>
 
@@ -19,7 +20,10 @@
         'timer',
       ]),
       ...mapGetters('cards', [
-        'current',
+        'getCurrentCardName',
+      ]),
+      ...mapGetters('players', [
+        'currentPlayerName',
       ]),
     },
     methods: {

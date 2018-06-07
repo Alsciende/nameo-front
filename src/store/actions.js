@@ -1,5 +1,14 @@
+function Attempt(getters, outcome) {
+  this.step = getters['phases/current'];
+  this.card = getters['cards/current'];
+  this.presentedAt = getters['cards/currentAt'];
+  this.presentedFor = Math.round((Date.now() - getters['cards/currentAt']) / 1000);
+  this.outcome = outcome;
+}
+
 export const PhaseStarts = ({ commit, getters }) => {
   commit('players/randomizeOrder');
+  commit('phases/increment');
   commit('cards/init', getters['players/teams']);
   commit('cards/reset');
   commit('router/change', 'start-of-turn');
@@ -13,6 +22,7 @@ export const TurnStarts = ({ dispatch, commit }) => {
 };
 
 export const CardIsWon = ({ dispatch, commit, getters }) => {
+  commit('attempts/add', new Attempt(getters, 0));
   commit('cards/success');
   commit('cards/next');
   if (getters['cards/current'] === undefined) {
@@ -21,6 +31,7 @@ export const CardIsWon = ({ dispatch, commit, getters }) => {
 };
 
 export const CardIsLost = ({ dispatch, commit, getters }) => {
+  commit('attempts/add', new Attempt(getters, 1));
   commit('cards/failure');
   commit('cards/next');
   if (getters['cards/current'] === undefined) {
@@ -33,8 +44,9 @@ export const DrawIsEmpty = ({ commit }) => {
   commit('router/change', 'end-of-turn');
 };
 
-export const TimeIsOut = ({ commit }) => {
+export const TimeIsOut = ({ commit, getters }) => {
   commit('timer/clear');
+  commit('attempts/add', new Attempt(getters, 2));
   commit('cards/failure');
   commit('cards/next');
   commit('router/change', 'end-of-turn');

@@ -6,10 +6,12 @@ import * as getters from './getters';
 import * as mutations from './mutations';
 import * as actions from './actions';
 
+import router from './modules/router';
+import phases from './modules/phases';
 import timer from './modules/timer';
 import cards from './modules/cards';
 import players from './modules/players';
-import router from './modules/router';
+import attempts from './modules/attempts';
 
 Vue.use(Vuex);
 
@@ -22,10 +24,12 @@ export default new Vuex.Store({
   getters,
   mutations,
   modules: {
+    router,
+    phases,
     timer,
     cards,
     players,
-    router,
+    attempts,
   },
   strict: debug,
   plugins: [
