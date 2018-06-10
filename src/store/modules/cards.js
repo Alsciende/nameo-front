@@ -29,7 +29,7 @@ const mutations = {
     }
 
     state.current = state.piles.draw.shift();
-    state.currentAt = Date.now();
+    state.currentAt = new Date();
   },
   success(state) {
     state.piles.won.push(state.current);

@@ -1,8 +1,8 @@
 function Attempt(getters, outcome) {
   this.step = getters['phases/current'];
   this.card = getters['cards/current'];
-  this.presentedAt = getters['cards/currentAt'];
-  this.presentedFor = Math.round((Date.now() - getters['cards/currentAt']) / 1000);
+  this.presentedAt = getters['cards/currentAt'].toISOString();
+  this.presentedFor = Math.round((Date.now() - getters['cards/currentAt'].getTime()) / 1000);
   this.outcome = outcome;
 }
 
