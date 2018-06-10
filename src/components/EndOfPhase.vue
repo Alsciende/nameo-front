@@ -1,10 +1,8 @@
 <template>
     <div>
-        <ul>
-            <li v-for="(pile, team) in score">
-                {{ teamName(team) }} => {{ pile.length }}
-            </li>
-        </ul>
+        <div v-for="(pile, team) in score">
+            {{ teamName(team) }} => {{ pile.length }}
+        </div>
         <p>
             <button @click="next">Next Phase</button>
         </p>

@@ -1,5 +1,6 @@
 import shuffle from 'lodash/shuffle';
 import mapValues from 'lodash/mapValues';
+import maxBy from 'lodash/maxBy';
 
 // actions
 const actions = {};
@@ -10,13 +11,26 @@ const getters = {
   currentAt: state => state.currentAt,
   getCurrentCardName: state => state.dictionary[state.current],
   drawCount: state => state.piles.draw.length,
-  score: state => state.teams,
+  score: state => state.wonByTeamForCurrentPhase,
+  finalScore: state => state.scoresByPhase,
+  winningTeam: state => teams => maxBy(Object.keys(teams), team => {
+    return state.scoresByPhase.reduce((accumulator, score) => {
+      return accumulator + score[team].length;
+    }, 0)
+  }),
 };
 
 // mutations
 const mutations = {
-  init(state, teams) {
-    state.teams = mapValues(teams, () => []);
+  initGame(state) {
+    state.scoresByPhase = [];
+  },
+  initPhase(state, teams) {
+    if (state.wonByTeamForCurrentPhase !== null) {
+      throw new Error('Cannot reset state.wonByTeamForCurrentPhase because it is not null');
+    }
+
+    state.wonByTeamForCurrentPhase = mapValues(teams, () => []);
   },
   reset(state) {
     state.piles.lost = [];
@@ -26,7 +40,7 @@ const mutations = {
   },
   next(state) {
     if (state.current) {
-      return;
+      throw new Error('Cannot select next card because there is already one selected');
     }
 
     state.current = state.piles.draw.shift();
@@ -45,9 +59,13 @@ const mutations = {
     state.piles.lost = [];
   },
   appendWon(state, team) {
-    state.teams[team] = state.teams[team].concat(state.piles.won);
+    state.wonByTeamForCurrentPhase[team] = state.wonByTeamForCurrentPhase[team].concat(state.piles.won);
     state.piles.won = [];
   },
+  saveScore(state) {
+    state.scoresByPhase.push(state.wonByTeamForCurrentPhase);
+    state.wonByTeamForCurrentPhase = null;
+  }
 };
 
 export default {
@@ -67,7 +85,8 @@ export default {
       lost: [],
       won: [],
     },
-    teams: null,
+    wonByTeamForCurrentPhase: null,
+    scoresByPhase: null,
     current: null,
     currentAt: null,
   },

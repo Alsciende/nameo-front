@@ -3,23 +3,23 @@ const actions = {};
 
 // getters
 const getters = {
-  current: state => state.phase,
+  current: state => state.current,
 };
 
 // mutations
 const mutations = {
   reset(state) {
-    state.phase = 1;
+    state.current = 1;
   },
   increment(state) {
-    state.phase++;
+    state.current++;
   },
 };
 
 export default {
   namespaced: true,
   state: {
-    phase: null,
+    current: null,
   },
   getters,
   actions,
