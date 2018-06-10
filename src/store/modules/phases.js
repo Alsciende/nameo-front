@@ -8,6 +8,9 @@ const getters = {
 
 // mutations
 const mutations = {
+  reset(state) {
+    state.phase = 1;
+  },
   increment(state) {
     state.phase++;
   },
@@ -16,7 +19,7 @@ const mutations = {
 export default {
   namespaced: true,
   state: {
-    phase: 0,
+    phase: null,
   },
   getters,
   actions,

@@ -8,7 +8,6 @@ function Attempt(getters, outcome) {
 
 export const PhaseStarts = ({ commit, getters }) => {
   commit('players/randomizeOrder');
-  commit('phases/increment');
   commit('cards/init', getters['players/teams']);
   commit('cards/reset');
   commit('router/change', 'start-of-turn');
@@ -64,6 +63,17 @@ export const TurnEnds = ({ getters, commit }) => {
   }
 };
 
-export const PhaseEnds = ({ commit }) => {
+export const PhaseEnds = ({ getters, commit }) => {
+  commit('phases/increment');
+  console.log(getters['phase/current']);
+  if (getters['phases/current'] > 3) {
+    commit('router/change', 'end-of-game');
+  } else {
+    commit('router/change', 'start-of-phase');
+  }
+};
+
+export const GameStarts = ({ commit }) => {
+  commit('phases/reset');
   commit('router/change', 'start-of-phase');
 };

@@ -7,10 +7,11 @@
 
 <script>
   import StartOfPhase from './components/StartOfPhase';
-  import EndOfPhase from './components/EndOfPhase';
   import StartOfTurn from './components/StartOfTurn';
   import Turn from './components/Turn';
   import EndOfTurn from './components/EndOfTurn';
+  import EndOfPhase from './components/EndOfPhase';
+  import EndOfGame from './components/EndOfGame';
   import { mapGetters } from 'vuex';
 
   export default {
@@ -21,6 +22,7 @@
       Turn,
       EndOfTurn,
       EndOfPhase,
+      EndOfGame,
     },
     computed: {
       ...mapGetters('router', [
@@ -28,7 +30,7 @@
       ]),
     },
     mounted() {
-      this.$store.commit('router/change', 'start-of-phase');
+      this.$store.dispatch('GameStarts');
     },
   };
 </script>
