@@ -8,6 +8,7 @@ const getters = {
   currentPlayerName: state => _.get(state.players, `${state.currentPlayer}.name`),
   currentTeam: state => state.currentTeam,
   teams: state => state.teams,
+  teamName: state => id => state.teams[id].name,
 };
 
 // mutations

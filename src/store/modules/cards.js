@@ -10,6 +10,7 @@ const getters = {
   currentAt: state => state.currentAt,
   getCurrentCardName: state => state.dictionary[state.current],
   drawCount: state => state.piles.draw.length,
+  score: state => state.teams,
 };
 
 // mutations
