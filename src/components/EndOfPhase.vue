@@ -3,6 +3,8 @@
         <div v-for="(pile, team) in score">
             {{ teamName(team) }} => {{ pile.length }}
         </div>
+        <h4>The Winner of the phase is:</h4>
+        <h2>{{ teamName(phaseWinner(teams)) }}</h2>
         <p>
             <button @click="next">Next Phase</button>
         </p>
@@ -16,10 +18,12 @@
     name: "EndOfPhase",
     computed: {
       ...mapGetters('players', [
+        'teams',
         'teamName',
       ]),
       ...mapGetters('cards', [
         'score',
+        'phaseWinner',
       ]),
     },
     methods: {

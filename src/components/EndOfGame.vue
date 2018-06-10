@@ -6,7 +6,8 @@
                 {{ teamName(team) }} => {{ pile.length }}
             </div>
         </div>
-        <h2>And the winner is: {{ teamName(winningTeam(teams)) }}</h2>
+        <h4>The winner of the game is:</h4>
+        <h2>{{ teamName(gameWinner(teams)) }}</h2>
         <p>
             <button @click="next">Play Again</button>
         </p>
@@ -25,7 +26,7 @@
       ]),
       ...mapGetters('cards', [
         'finalScore',
-        'winningTeam',
+        'gameWinner',
       ]),
     },
     methods: {

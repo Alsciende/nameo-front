@@ -1,12 +1,14 @@
 <template>
     <div>
         <h2>This is the turn of {{ currentPlayerName }}</h2>
+        <h4>Timer:</h4>
         <h2>{{ timer }}</h2>
+        <h4>Your card:</h4>
+        <h2>{{ getCurrentCardName }}</h2>
         <p>
             <button @click="success">Success</button>
             <button @click="failure">Failure</button>
         </p>
-        <h2>{{ getCurrentCardName }}</h2>
     </div>
 </template>
 

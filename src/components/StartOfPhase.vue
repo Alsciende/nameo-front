@@ -2,7 +2,7 @@
     <div>
         <h2>Phase {{ current }}</h2>
         <p>
-            <button @click="next">Go</button>
+            <button @click="next">Start Phase</button>
         </p>
     </div>
 </template>
