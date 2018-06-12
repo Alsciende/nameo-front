@@ -15,7 +15,7 @@ export const GameStarts = ({ commit }) => {
   commit('phases/reset');
   commit('cards/initGame');
   axios.post('/matches/', {
-    nb_cards: 3,
+    nb_cards: 30,
     difficulty: 2,
     nb_players: 6,
     nb_teams: 3,
@@ -38,7 +38,7 @@ export const PhaseStarts = ({ commit, getters }) => {
 };
 
 export const TurnStarts = ({ dispatch, commit }) => {
-  dispatch('timer/start', 10);
+  dispatch('timer/start', 30);
   commit('cards/next');
   commit('router/change', 'turn');
 };
