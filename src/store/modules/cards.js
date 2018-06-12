@@ -15,7 +15,7 @@ const getters = {
   finalScore: state => state.scoresByPhase,
   phaseWinner: state => teams => maxBy(
     Object.keys(teams),
-    team => state.scoresForCurrentPhase[team]
+    team => state.scoresForCurrentPhase[team],
   ),
   gameWinner: state => teams => maxBy(
     Object.keys(teams),
@@ -29,6 +29,12 @@ const getters = {
 const mutations = {
   initGame(state) {
     state.scoresByPhase = [];
+  },
+  setCards(state, cards) {
+    state.dictionary = {};
+    cards.forEach((card) => {
+      state.dictionary[card.id] = card.title;
+    });
   },
   initPhase(state, teams) {
     if (state.scoresForCurrentPhase !== null) {
