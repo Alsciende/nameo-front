@@ -1,12 +1,13 @@
 import axios from 'axios';
+import moment from 'moment';
 
 axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 function Attempt(getters, outcome) {
   this.step = getters['phases/current'];
   this.card = getters['cards/current'];
-  this.presentedAt = getters['cards/currentAt'].toISOString();
-  this.presentedFor = Math.round((Date.now() - getters['cards/currentAt'].getTime()) / 1000);
+  this.presentedAt = getters['cards/currentAt'];
+  this.presentedFor = moment().unix() - getters['cards/currentAt'];
   this.outcome = outcome;
 }
 
@@ -14,11 +15,11 @@ export const GameStarts = ({ commit }) => {
   commit('phases/reset');
   commit('cards/initGame');
   axios.post('/matches/', {
-    nb_cards: 30,
+    nb_cards: 3,
     difficulty: 2,
     nb_players: 6,
     nb_teams: 3,
-    started_at: '2017-07-14T08:40:00+06:00',
+    started_at: moment().toISOString(true),
   }).then(({ data }) => {
     commit('setGameId', data.id);
     commit('cards/setCards', data.cards);
@@ -85,13 +86,21 @@ export const TurnEnds = ({ getters, commit }) => {
   }
 };
 
-export const PhaseEnds = ({ getters, commit }) => {
+export const PhaseEnds = ({ getters, commit, dispatch }) => {
   commit('cards/saveScore');
   commit('phases/increment');
   if (getters['phases/current'] > 3) {
     commit('router/change', 'end-of-game');
+    dispatch('GameEnds');
   } else {
     commit('router/change', 'start-of-phase');
   }
 };
 
+export const GameEnds = ({ getters, commit }) => {
+  axios.post(`/matches/${getters.getGameId}/results/`, {
+    attempts: getters['attempts/serialize'],
+  }).catch((error) => {
+    commit('setError', error);
+  });
+};

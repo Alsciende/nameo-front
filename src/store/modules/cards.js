@@ -1,6 +1,7 @@
 import shuffle from 'lodash/shuffle';
 import mapValues from 'lodash/mapValues';
 import maxBy from 'lodash/maxBy';
+import moment from 'moment';
 
 // actions
 const actions = {};
@@ -55,7 +56,7 @@ const mutations = {
     }
 
     state.current = state.piles.draw.shift();
-    state.currentAt = new Date();
+    state.currentAt = moment().unix();
   },
   success(state) {
     state.piles.won.push(state.current);
