@@ -11,16 +11,28 @@ function Attempt(getters, outcome) {
   this.outcome = outcome;
 }
 
-export const GameStarts = ({ commit }) => {
+export const AppMounted = ({ commit }) => {
+  commit('router/change', 'set-parameters');
+};
+
+export const ParametersSet = ({ commit }, data) => {
+  commit('setNbCards', data.nbCards);
+  commit('setDifficulty', data.difficulty);
+  commit('setNbPlayers', data.nbPlayers);
+  commit('setNbTeams', data.nbTeams);
+  commit('players/init', data);
+  commit('router/change', 'set-player-names');
+};
+
+export const PlayerNamesSet = ({ commit }, names) => {
+  commit('players/setNames', names);
+  commit('router/change', 'set-player-teams');
+};
+
+export const GameStarts = ({ commit, getters }) => {
   commit('phases/reset');
   commit('cards/initGame');
-  axios.post('/matches/', {
-    nb_cards: 30,
-    difficulty: 2,
-    nb_players: 6,
-    nb_teams: 3,
-    started_at: moment().toISOString(true),
-  }).then(({ data }) => {
+  axios.post('/matches/', getters.getGameParameters).then(({ data }) => {
     commit('setGameId', data.id);
     commit('cards/setCards', data.cards);
     commit('router/change', 'start-of-phase');

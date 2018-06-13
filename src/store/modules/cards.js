@@ -83,11 +83,7 @@ const mutations = {
 export default {
   namespaced: true,
   state: {
-    dictionary: {
-      'c27d0048-416c-4f42-b96e-1c9e9b442b8c': 'Riri',
-      'e4b0bced-8443-409c-af44-7dadc157769b': 'Fifi',
-      '02371147-a9bf-4008-b47e-17f73b8fa3d3': 'Loulou',
-    },
+    dictionary: {},
     piles: {
       draw: [],
       lost: [],

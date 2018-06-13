@@ -1,18 +1,55 @@
 import _ from 'lodash';
+import uuidv4 from 'uuid/v4';
 
 // actions
 const actions = {};
 
 // getters
 const getters = {
+  players: state => state.players,
+  playerName: state => id => state.players[id].name,
   currentPlayerName: state => _.get(state.players, `${state.currentPlayer}.name`),
   currentTeam: state => state.currentTeam,
   teams: state => state.teams,
   teamName: state => id => state.teams[id].name,
+  playerTeams: state => state.playerTeams,
+  teamPlayers: state => teamId => _.filter(
+    _.keys(state.playerTeams),
+    playerId => state.playerTeams[playerId] === teamId,
+  ),
 };
 
 // mutations
 const mutations = {
+  init(state, data) {
+    state.players = {};
+    state.teams = {};
+    state.playerTeams = {};
+
+    for (let i = 0; i < data.nbPlayers; i++) {
+      state.players[uuidv4()] = {
+        name: `Player ${i}`,
+      };
+    }
+
+    for (let i = 0; i < data.nbTeams; i++) {
+      state.teams[uuidv4()] = {
+        name: `Team ${i}`,
+      };
+    }
+
+    const teams = Object.keys(state.teams);
+    _.forOwn(state.players, (value, key) => {
+      state.playerTeams[key] = teams[Object.keys(state.playerTeams).length % teams.length];
+    });
+  },
+  setNames(state, names) {
+    _.forOwn(names, (value, key) => {
+      if (key in state.players) {
+        state.players[key].name = value;
+      }
+    });
+  },
   randomizeOrder(state) {
     state.currentPlayer = null;
     state.currentTeam = null;
@@ -49,40 +86,11 @@ const mutations = {
 export default {
   namespaced: true,
   state: {
-    players: {
-      'c27d0048-416c-4f42-b96e-1c9e9b442b8c': {
-        name: 'Chantal',
-      },
-      'e4b0bced-8443-409c-af44-7dadc157769b': {
-        name: 'Raoul',
-      },
-      '02371147-a9bf-4008-b47e-17f73b8fa3d3': {
-        name: 'Julie',
-      },
-      '384d43ff-dca9-4ef6-a665-54ae361c5722': {
-        name: 'Claire',
-      },
-      '3b67dc6b-e823-4d3a-912a-9a8ba5a059a8': {
-        name: 'Clément',
-      },
-    },
-    teams: {
-      '63191da6-ca2e-4241-8217-59b662011cdd': {
-        name: 'Équipe des parents',
-      },
-      '71d7cf34-a85f-497a-87fd-9eb41fd7167f': {
-        name: 'Équipe des enfants',
-      },
-    },
-    playerTeams: {
-      'c27d0048-416c-4f42-b96e-1c9e9b442b8c': '63191da6-ca2e-4241-8217-59b662011cdd',
-      'e4b0bced-8443-409c-af44-7dadc157769b': '63191da6-ca2e-4241-8217-59b662011cdd',
-      '02371147-a9bf-4008-b47e-17f73b8fa3d3': '71d7cf34-a85f-497a-87fd-9eb41fd7167f',
-      '384d43ff-dca9-4ef6-a665-54ae361c5722': '71d7cf34-a85f-497a-87fd-9eb41fd7167f',
-      '3b67dc6b-e823-4d3a-912a-9a8ba5a059a8': '71d7cf34-a85f-497a-87fd-9eb41fd7167f',
-    },
-    teamOrder: null,
-    playerOrder: null,
+    players: {},
+    teams: {},
+    playerTeams: {},
+    teamOrder: [],
+    playerOrder: {},
     currentPlayer: null,
     currentTeam: null,
   },

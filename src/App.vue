@@ -1,11 +1,14 @@
 <template>
     <div id="app">
-        <h1>Page {{ route }}</h1>
+        <h4>Page {{ route }}</h4>
         <component v-bind:is="route"></component>
     </div>
 </template>
 
 <script>
+  import SetParameters from './components/SetParameters';
+  import SetPlayerNames from './components/SetPlayerNames';
+  import SetPlayerTeams from './components/SetPlayerTeams';
   import StartOfPhase from './components/StartOfPhase';
   import StartOfTurn from './components/StartOfTurn';
   import Turn from './components/Turn';
@@ -17,6 +20,9 @@
   export default {
     name: 'app',
     components: {
+      SetParameters,
+      SetPlayerNames,
+      SetPlayerTeams,
       StartOfPhase,
       StartOfTurn,
       Turn,
@@ -30,7 +36,7 @@
       ]),
     },
     mounted() {
-      this.$store.dispatch('GameStarts');
+      this.$store.dispatch('AppMounted');
     },
   };
 </script>

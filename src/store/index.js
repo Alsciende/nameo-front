@@ -21,6 +21,10 @@ export default new Vuex.Store({
   state: {
     id: null,
     error: null,
+    nbCards: null,
+    difficulty: null,
+    nbPlayers: null,
+    nbTeams: null,
   },
   actions,
   getters,
