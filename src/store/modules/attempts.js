@@ -6,7 +6,10 @@ const actions = {};
 
 // getters
 const getters = {
-  serialize: state => state.attempts.map(attempt => mapKeys(attempt, (value, key) => snakeCase(key))),
+  serialize: state => state.attempts.map(attempt => mapKeys(
+    attempt,
+    (value, key) => snakeCase(key),
+  )),
 };
 
 // mutations
