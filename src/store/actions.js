@@ -11,8 +11,18 @@ function Attempt(getters, outcome) {
   this.outcome = outcome;
 }
 
-export const AppMounted = ({ commit }) => {
-  commit('router/change', 'set-parameters');
+export const AppMounted = ({ commit, getters }) => {
+  switch (getters['router/route']) {
+    case null:
+      commit('router/change', 'set-parameters');
+      break;
+    case 'resume-game':
+      commit('router/change', 'resume-game');
+      break;
+    default:
+      commit('router/stash');
+      commit('router/change', 'resume-game');
+  }
 };
 
 export const ParametersSet = ({ commit }, data) => {
@@ -32,6 +42,7 @@ export const PlayerNamesSet = ({ commit }, names) => {
 export const GameStarts = ({ commit, getters }) => {
   commit('phases/reset');
   commit('cards/initGame');
+  commit('setStartedAt');
   axios.post('/matches/', getters.getGameParameters).then(({ data }) => {
     commit('setGameId', data.id);
     commit('cards/setCards', data.cards);
@@ -115,4 +126,15 @@ export const GameEnds = ({ getters, commit }) => {
   }).catch((error) => {
     commit('setError', error);
   });
+};
+
+export const QuitGame = ({ commit }) => {
+  commit('router/change', 'set-parameters');
+};
+
+export const ResumeGame = ({ commit, getters, dispatch }) => {
+  commit('router/apply');
+  if (getters['router/route'] === 'turn') {
+    dispatch('TimeIsOut');
+  }
 };

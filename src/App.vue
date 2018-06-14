@@ -15,6 +15,7 @@
   import EndOfTurn from './components/EndOfTurn';
   import EndOfPhase from './components/EndOfPhase';
   import EndOfGame from './components/EndOfGame';
+  import ResumeGame from './components/ResumeGame';
   import { mapGetters } from 'vuex';
 
   export default {
@@ -29,6 +30,7 @@
       EndOfTurn,
       EndOfPhase,
       EndOfGame,
+      ResumeGame,
     },
     computed: {
       ...mapGetters('router', [

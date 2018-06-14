@@ -21,3 +21,7 @@ export const setNbPlayers = (state, nbPlayers) => {
 export const setNbTeams = (state, nbTeams) => {
   state.nbTeams = nbTeams;
 };
+
+export const setStartedAt = (state) => {
+  state.startedAt = Date.now();
+};

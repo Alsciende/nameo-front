@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-// import createPersistedState from 'vuex-persistedstate';
+import createPersistedState from 'vuex-persistedstate';
 
 import * as getters from './getters';
 import * as mutations from './mutations';
@@ -25,6 +25,7 @@ export default new Vuex.Store({
     difficulty: null,
     nbPlayers: null,
     nbTeams: null,
+    startedAt: null,
   },
   actions,
   getters,
@@ -39,9 +40,9 @@ export default new Vuex.Store({
   },
   strict: debug,
   plugins: [
-    // createPersistedState({
-    //   paths: [
-    //   ],
-    // }),
+    createPersistedState({
+      paths: [
+      ],
+    }),
   ],
 });

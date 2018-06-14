@@ -30,6 +30,7 @@ const getters = {
 const mutations = {
   initGame(state) {
     state.scoresByPhase = [];
+    state.scoresForCurrentPhase = null;
   },
   setCards(state, cards) {
     state.dictionary = {};
