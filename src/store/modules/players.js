@@ -1,5 +1,11 @@
-import _ from 'lodash';
 import uuidv4 from 'uuid/v4';
+import filter from 'lodash/filter';
+import keys from 'lodash/keys';
+import forOwn from 'lodash/forOwn';
+import get from 'lodash/get';
+import shuffle from 'lodash/shuffle';
+import reduce from 'lodash/reduce';
+import mapValues from 'lodash/mapValues';
 
 // actions
 const actions = {};
@@ -8,13 +14,13 @@ const actions = {};
 const getters = {
   players: state => state.players,
   playerName: state => id => state.players[id].name,
-  currentPlayerName: state => _.get(state.players, `${state.currentPlayer}.name`),
+  currentPlayerName: state => get(state.players, `${state.currentPlayer}.name`),
   currentTeam: state => state.currentTeam,
   teams: state => state.teams,
   teamName: state => id => state.teams[id].name,
   playerTeams: state => state.playerTeams,
-  teamPlayers: state => teamId => _.filter(
-    _.keys(state.playerTeams),
+  teamPlayers: state => teamId => filter(
+    keys(state.playerTeams),
     playerId => state.playerTeams[playerId] === teamId,
   ),
 };
@@ -39,12 +45,12 @@ const mutations = {
     }
 
     const teams = Object.keys(state.teams);
-    _.forOwn(state.players, (value, key) => {
+    forOwn(state.players, (value, key) => {
       state.playerTeams[key] = teams[Object.keys(state.playerTeams).length % teams.length];
     });
   },
   setNames(state, names) {
-    _.forOwn(names, (value, key) => {
+    forOwn(names, (value, key) => {
       if (key in state.players) {
         state.players[key].name = value;
       }
@@ -53,8 +59,8 @@ const mutations = {
   randomizeOrder(state) {
     state.currentPlayer = null;
     state.currentTeam = null;
-    state.teamOrder = _.shuffle(_.keys(state.teams));
-    state.playerOrder = _.mapValues(state.teams, (team, id) => _.shuffle(_.reduce(
+    state.teamOrder = shuffle(keys(state.teams));
+    state.playerOrder = mapValues(state.teams, (team, id) => shuffle(reduce(
       state.playerTeams,
       (accumulator, value, key) => {
         if (value === id) {
