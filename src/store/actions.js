@@ -12,16 +12,13 @@ function Attempt(getters, outcome) {
 }
 
 export const AppMounted = ({ commit, getters }) => {
-  switch (getters['router/route']) {
-    case null:
-      commit('router/change', 'set-parameters');
-      break;
-    case 'resume-game':
-      commit('router/change', 'resume-game');
-      break;
-    default:
+  if (getters.getStartedAt) {
+    if (getters['router/route'] !== 'resume-game') {
       commit('router/stash');
-      commit('router/change', 'resume-game');
+    }
+    commit('router/change', 'resume-game');
+  } else {
+    commit('router/change', 'set-parameters');
   }
 };
 
@@ -123,6 +120,8 @@ export const PhaseEnds = ({ getters, commit, dispatch }) => {
 export const GameEnds = ({ getters, commit }) => {
   axios.post(`/matches/${getters.getGameId}/results/`, {
     attempts: getters['attempts/serialize'],
+  }).then(() => {
+    commit('resetStartedAt');
   }).catch((error) => {
     commit('setError', error);
   });
