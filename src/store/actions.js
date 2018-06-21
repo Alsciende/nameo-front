@@ -40,7 +40,7 @@ export const GameStarts = ({ commit, getters }) => {
   commit('phases/reset');
   commit('cards/initGame');
   commit('setStartedAt');
-  axios.post('/matches/', getters.getGameParameters).then(({ data }) => {
+  axios.post('/games/', getters.getGameParameters).then(({ data }) => {
     commit('setGameId', data.id);
     commit('cards/setCards', data.cards);
     commit('router/change', 'start-of-phase');
@@ -118,7 +118,7 @@ export const PhaseEnds = ({ getters, commit, dispatch }) => {
 };
 
 export const GameEnds = ({ getters, commit }) => {
-  axios.post(`/matches/${getters.getGameId}/results/`, {
+  axios.post(`/games/${getters.getGameId}/results/`, {
     attempts: getters['attempts/serialize'],
   }).then(() => {
     commit('resetStartedAt');
