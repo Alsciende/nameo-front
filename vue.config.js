@@ -5,11 +5,11 @@ module.exports = {
   configureWebpack: {
     plugins: [
       new BundleAnalyzerPlugin({
-        analyzerHost: 'localhost'
+        analyzerHost: 'localhost',
       }),
       new MomentLocalesPlugin({
         localesToKeep: ['fr-fr'],
       }),
-    ]
-  }
+    ],
+  },
 };
