@@ -1,8 +1,9 @@
 <template>
     <div>
-        <h2>This is the turn of {{ currentPlayerName }}</h2>
+        <h2>C'est le tour de</h2>
+        <h1>{{ currentPlayerName }}</h1>
         <p>
-            <button @click="startTurn">Start Turn</button>
+            <button @click="startTurn">Lancer le timer</button>
         </p>
         <team-background :use-timer="false"></team-background>
     </div>

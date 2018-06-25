@@ -1,15 +1,18 @@
 <template>
     <div>
+        <h1>Fin de la partie</h1>
+        <!--
         <div v-for="(score, index) in finalScore">
-            <h2>Phase {{ index + 1 }}</h2>
+            <h4>Phase {{ index + 1 }}</h4>
             <div v-for="(pile, teamId) in score">
                 {{ teamName(teamId) }} => {{ pile.length }}
             </div>
         </div>
-        <h4>The winner of the game is:</h4>
-        <h2>{{ teamName(gameWinner(teams)) }}</h2>
+        -->
+        <h4>La victoire finale revient à</h4>
+        <h2>{{ teamName(gameWinner(teams)) }} !!</h2>
         <p>
-            <button @click="next">Play Again</button>
+            <button @click="next">Nouvelle partie</button>
         </p>
     </div>
 </template>
@@ -31,7 +34,7 @@
     },
     methods: {
       next() {
-        this.$store.dispatch('GameStarts');
+        this.$store.dispatch('GameLaunched');
       },
     },
   };

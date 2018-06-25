@@ -1,11 +1,14 @@
 <template>
     <div>
+        <h1>Équipes</h1>
         <div v-for="(team, teamId) in teams">
             <h2>{{ teamName(teamId) }}</h2>
-            <p v-for="playerId in teamPlayers(teamId)">{{ playerName(playerId) }}</p>
+            <ul>
+                <li v-for="playerId in teamPlayers(teamId)">{{ playerName(playerId) }}</li>
+            </ul>
         </div>
         <p>
-            <button @click="next">Accept</button>
+            <button @click="next">Lancer la partie</button>
         </p>
     </div>
 </template>

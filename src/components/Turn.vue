@@ -1,13 +1,14 @@
 <template>
     <div>
-        <h2>This is the turn of {{ currentPlayerName }}</h2>
-        <h4>Timer:</h4>
-        <h2>{{ timer }}</h2>
-        <h4>Your card:</h4>
+        <h2>C'est le tour de</h2>
+        <h1>{{ currentPlayerName }}</h1>
+        <h4>Nom à faire deviner</h4>
         <h2>{{ getCurrentCardName }}</h2>
+        <h4>Timer</h4>
+        <h2>{{ timer }}</h2>
         <p>
-            <button @click="success">Success</button>
-            <button @click="failure">Failure</button>
+            <button @click="success">Réussi</button>
+            <button @click="failure">Échoué</button>
         </p>
         <team-background :use-timer="true"></team-background>
     </div>

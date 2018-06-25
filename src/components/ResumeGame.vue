@@ -1,26 +1,30 @@
 <template>
     <div>
+        <h1>Reprise de partie</h1>
         <p>
-            I detected a previous game started on {{ startedAt }}.
+            Une partie a été commencée {{ startedAt }}.
         </p>
         <p>
-            What do you want to do?
+            Que voulez-vous faire ?
         </p>
         <p>
-            <button @click="resume">Resume the previous game</button>
+            <button @click="resume">Reprendre cette partie</button>
         </p>
         <p>
-            <button @click="quit">Start a new game</button>
+            <button @click="quit">Commencer une nouvelle partie</button>
         </p>
     </div>
 </template>
 
 <script>
+  import moment from 'moment';
+  moment.locale('fr');
+
   export default {
     name: "ResumeGame",
     computed: {
       startedAt() {
-        return (new Date(this.$store.getters.getStartedAt)).toString();
+        return moment(this.$store.getters.getStartedAt).fromNow();
       }
     },
     methods: {

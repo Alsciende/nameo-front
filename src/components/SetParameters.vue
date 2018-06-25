@@ -1,11 +1,12 @@
 <template>
     <div>
+        <h1>Paramétrage</h1>
         <p>
-            <label for="nbPlayersInput">Number of Players</label>
+            <label for="nbPlayersInput">Nombre de joueurs</label><br>
             <input id="nbPlayersInput" type="number" v-model="nbPlayers">
         </p>
         <p>
-            <label for="nbTeamsInput">Number of Teams</label>
+            <label for="nbTeamsInput">Nombre d'équipes</label><br>
             <input id="nbTeamsInput" type="number" v-model="nbTeams">
         </p>
         <!--
@@ -29,10 +30,10 @@
         </p>
         -->
         <p>
-            Soon: choose the game difficulty!
+            Bientôt : choisissez la difficulté !
         </p>
         <p>
-            <button @click="next">Player Names</button>
+            <button @click="next">Noms des joueurs</button>
         </p>
     </div>
 </template>

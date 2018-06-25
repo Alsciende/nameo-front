@@ -6,6 +6,7 @@
                 <stop v-if="useTimer" stop-opacity="0.5" v-bind:offset="progression" :stop-color="icon.color"></stop>
             </linearGradient>
         </defs>
+        <rect fill="#fff" x="0" y="0" width="100%" height="100%"></rect>
         <rect fill="url(#progress)" x="0" y="0" width="100%" height="100%"></rect>
         <use :href="url(icon)" x="10%" y="10%" width="80%" height="80%" :fill="icon.color" fill-opacity="0.3"></use>
     </svg>

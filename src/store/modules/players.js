@@ -16,18 +16,22 @@ const icons = ([
   {
     file: 'eggplant.svg',
     color: '#772583',
+    teamName: 'Équipe violette',
   },
   {
     file: 'banana.svg',
     color: '#f9c440',
+    teamName: 'Équipe jaune',
   },
   {
     file: 'strawberry.svg',
     color: '#ee2e31',
+    teamName: 'Équipe rouge',
   },
   {
     file: 'apple.svg',
     color: '#3ec300',
+    teamName: 'Équipe verte',
   },
 ]);
 
@@ -59,28 +63,25 @@ const mutations = {
       const playerId = uuidv4();
       state.players[playerId] = {
         id: playerId,
-        name: `Player ${i}`,
+        name: '',
       };
     }
 
+    const randomIcons = shuffle(icons);
+
     for (let i = 0; i < data.nbTeams; i++) {
       const teamId = uuidv4();
+      const teamIcon = randomIcons.shift();
       state.teams[teamId] = {
         id: teamId,
-        name: `Team ${i}`,
-        icon: null,
+        name: teamIcon.teamName,
+        icon: teamIcon,
       };
     }
 
     const teams = Object.keys(state.teams);
     forOwn(state.players, (player, playerId) => {
       state.playerTeams[playerId] = teams[Object.keys(state.playerTeams).length % teams.length];
-    });
-  },
-  assignRandomIcons(state) {
-    const randomIcons = shuffle(icons);
-    Object.keys(state.teams).forEach((teamId, index) => {
-      state.teams[teamId].icon = randomIcons[index];
     });
   },
   setNames(state, names) {

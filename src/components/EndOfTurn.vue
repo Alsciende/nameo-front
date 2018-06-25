@@ -1,10 +1,11 @@
 <template>
     <div>
-        <h2>End of your turn, {{ currentPlayerName }}</h2>
-        <h3>Won: {{ won.length }} cards</h3>
-        <h3>Lost: {{ lost.length }} cards</h3>
+        <h2>C'est la fin du tour de</h2>
+        <h1>{{ currentPlayerName }}</h1>
+        <h3>Réussis: {{ won.length }} noms</h3>
+        <h3>Échoués: {{ lost.length }} noms</h3>
         <p>
-            <button @click="next">Continue</button>
+            <button @click="next">Suite</button>
         </p>
         <team-background :use-timer="false"></team-background>
     </div>

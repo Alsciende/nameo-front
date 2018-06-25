@@ -1,6 +1,5 @@
 <template>
     <div id="app">
-        <h4>Page {{ route }}</h4>
         <component v-bind:is="route"></component>
     </div>
 </template>
@@ -46,12 +45,18 @@
 </script>
 
 <style>
-    #app {
-        font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    @import url('https://fonts.googleapis.com/css?family=Josefin+Sans|Roboto');
+    body {
+        font-family: 'Roboto', sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        color: #2d3436;
+        background-color: #dfe6e9;
+    }
+    #app {
         text-align: center;
-        color: #2c3e50;
-        margin-top: 60px;
+    }
+    h1, h2, h3, h4, h5 {
+        font-family: 'Josefin Sans', sans-serif;
     }
 </style>

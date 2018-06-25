@@ -32,7 +32,6 @@ export const ParametersSet = ({ commit }, data) => {
   commit('setNbPlayers', data.nbPlayers);
   commit('setNbTeams', data.nbTeams);
   commit('players/init', data);
-  commit('players/assignRandomIcons');
   commit('router/change', 'set-player-names');
 };
 

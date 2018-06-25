@@ -1,12 +1,15 @@
 <template>
     <div>
-        <div v-for="(pile, teamId) in score">
-            {{ teamName(teamId) }} => {{ pile.length }}
-        </div>
-        <h4>The Winner of the phase is:</h4>
-        <h2>{{ teamName(phaseWinner(teams)) }}</h2>
+        <h1>Fin de la phase {{ current }}</h1>
+        <table>
+        <tr v-for="(pile, teamId) in score">
+            <td>{{ teamName(teamId) }}</td><td>{{ pile.length }}</td>
+        </tr>
+        </table>
+        <h4>La victoire revient à</h4>
+        <h2>{{ teamName(phaseWinner(teams)) }} !</h2>
         <p>
-            <button @click="next">Next Phase</button>
+            <button @click="next">Suite</button>
         </p>
     </div>
 </template>
@@ -24,6 +27,9 @@
       ...mapGetters('cards', [
         'score',
         'phaseWinner',
+      ]),
+      ...mapGetters('phases', [
+        'current',
       ]),
     },
     methods: {
