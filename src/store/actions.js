@@ -28,6 +28,7 @@ export const ParametersSet = ({ commit }, data) => {
   commit('setNbPlayers', data.nbPlayers);
   commit('setNbTeams', data.nbTeams);
   commit('players/init', data);
+  commit('players/assignRandomIcons');
   commit('router/change', 'set-player-names');
 };
 
@@ -96,7 +97,7 @@ export const TimeIsOut = ({ commit, getters }) => {
 
 export const TurnEnds = ({ getters, commit }) => {
   commit('timer/clear');
-  commit('cards/appendWon', getters['players/currentTeam']);
+  commit('cards/appendWon', getters['players/getCurrentTeamId']);
   commit('cards/shuffleLost');
   commit('players/next');
   if (getters['cards/drawCount'] === 0) {

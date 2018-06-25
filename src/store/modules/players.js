@@ -4,8 +4,32 @@ import keys from 'lodash/keys';
 import forOwn from 'lodash/forOwn';
 import get from 'lodash/get';
 import shuffle from 'lodash/shuffle';
-import reduce from 'lodash/reduce';
 import mapValues from 'lodash/mapValues';
+
+const teamPlayers = state => teamId => filter(
+  keys(state.playerTeams),
+  playerId => state.playerTeams[playerId] === teamId,
+);
+
+// icons designed by Alena Artemova
+const icons = ([
+  {
+    file: 'eggplant.svg',
+    color: '#772583',
+  },
+  {
+    file: 'banana.svg',
+    color: '#f9c440',
+  },
+  {
+    file: 'strawberry.svg',
+    color: '#ee2e31',
+  },
+  {
+    file: 'apple.svg',
+    color: '#3ec300',
+  },
+]);
 
 // actions
 const actions = {};
@@ -14,15 +38,14 @@ const actions = {};
 const getters = {
   players: state => state.players,
   playerName: state => id => state.players[id].name,
-  currentPlayerName: state => get(state.players, `${state.currentPlayer}.name`),
-  currentTeam: state => state.currentTeam,
+  currentPlayerName: state => get(state.players, `${state.currentPlayerId}.name`),
+  getCurrentTeamId: state => state.currentTeamId,
   teams: state => state.teams,
+  getTeam: state => teamId => state.teams[teamId],
+  getCurrentTeam: state => state.teams[state.currentTeamId],
   teamName: state => id => state.teams[id].name,
   playerTeams: state => state.playerTeams,
-  teamPlayers: state => teamId => filter(
-    keys(state.playerTeams),
-    playerId => state.playerTeams[playerId] === teamId,
-  ),
+  teamPlayers,
 };
 
 // mutations
@@ -33,59 +56,61 @@ const mutations = {
     state.playerTeams = {};
 
     for (let i = 0; i < data.nbPlayers; i++) {
-      state.players[uuidv4()] = {
+      const playerId = uuidv4();
+      state.players[playerId] = {
+        id: playerId,
         name: `Player ${i}`,
       };
     }
 
     for (let i = 0; i < data.nbTeams; i++) {
-      state.teams[uuidv4()] = {
+      const teamId = uuidv4();
+      state.teams[teamId] = {
+        id: teamId,
         name: `Team ${i}`,
+        icon: null,
       };
     }
 
     const teams = Object.keys(state.teams);
-    forOwn(state.players, (value, key) => {
-      state.playerTeams[key] = teams[Object.keys(state.playerTeams).length % teams.length];
+    forOwn(state.players, (player, playerId) => {
+      state.playerTeams[playerId] = teams[Object.keys(state.playerTeams).length % teams.length];
+    });
+  },
+  assignRandomIcons(state) {
+    const randomIcons = shuffle(icons);
+    Object.keys(state.teams).forEach((teamId, index) => {
+      state.teams[teamId].icon = randomIcons[index];
     });
   },
   setNames(state, names) {
-    forOwn(names, (value, key) => {
-      if (key in state.players) {
-        state.players[key].name = value;
+    forOwn(names, (name, playerId) => {
+      if (playerId in state.players) {
+        state.players[playerId].name = name;
       }
     });
   },
   randomizeOrder(state) {
-    state.currentPlayer = null;
-    state.currentTeam = null;
+    state.currentPlayerId = null;
+    state.currentTeamId = null;
     state.teamOrder = shuffle(keys(state.teams));
-    state.playerOrder = mapValues(state.teams, (team, id) => shuffle(reduce(
-      state.playerTeams,
-      (accumulator, value, key) => {
-        if (value === id) {
-          accumulator.push(key);
-        }
-        return accumulator;
-      },
-      [],
-    )));
+    state.playerOrder = mapValues(state.teams, (team, teamId) => shuffle(teamPlayers(state)(teamId)));
   },
   next(state) {
-    if (state.currentPlayer) {
-      if (state.playerTeams[state.currentPlayer] !== state.currentTeam) {
+    if (state.currentPlayerId) {
+      if (state.playerTeams[state.currentPlayerId] !== state.currentTeamId) {
         throw new Error('Current player\'s team is different from current team');
       }
 
-      state.playerOrder[state.currentTeam].push(state.currentPlayer);
-      state.currentPlayer = null;
+      state.playerOrder[state.currentTeamId].push(state.currentPlayerId);
+      state.currentPlayerId = null;
 
-      state.teamOrder.push(state.currentTeam);
-      state.currentTeam = null;
+      state.teamOrder.push(state.currentTeamId);
+      state.currentTeamId = null;
     }
 
-    state.currentTeam = state.teamOrder.shift();
-    state.currentPlayer = state.playerOrder[state.currentTeam].shift();
+    state.currentTeamId = state.teamOrder.shift();
+    state.currentPlayerId = state.playerOrder[state.currentTeamId].shift();
   },
 };
 
@@ -97,8 +122,8 @@ export default {
     playerTeams: {},
     teamOrder: [],
     playerOrder: {},
-    currentPlayer: null,
-    currentTeam: null,
+    currentPlayerId: null,
+    currentTeamId: null,
   },
   getters,
   actions,

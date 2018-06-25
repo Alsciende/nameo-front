@@ -1,8 +1,8 @@
 <template>
     <div>
-        <p v-for="(player, id, index) in players">
+        <p v-for="(player, playerId, index) in players">
             <label>Player {{ index }}</label>
-            <input v-model="names[id]">
+            <input v-model="names[playerId]">
         </p>
         <p>
             <button @click="next">Player Teams</button>

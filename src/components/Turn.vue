@@ -27,31 +27,6 @@
 
   export default {
     name: "Turn",
-    data() {
-      // icons designed by Alena Artemova
-      const icons = ([
-        {
-          file: 'strawberry.svg',
-          color: '#ee2e31',
-        },
-        {
-          file: 'apple.svg',
-          color: '#3ec300',
-        },
-        {
-          file: 'eggplant.svg',
-          color: '#772583',
-        },
-        {
-          file: 'banana.svg',
-          color: '#f9c440',
-        },
-      ]);
-
-      return {
-        icon: icons[Math.floor(icons.length * Math.random())],
-      };
-    },
     computed: {
       ...mapGetters('timer', [
         'timer',
@@ -62,7 +37,11 @@
       ]),
       ...mapGetters('players', [
         'currentPlayerName',
+        'getCurrentTeam',
       ]),
+      icon() {
+        return this.getCurrentTeam.icon;
+      },
     },
     methods: {
       url(icon) {

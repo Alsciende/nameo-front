@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div v-for="(pile, team) in score">
-            {{ teamName(team) }} => {{ pile.length }}
+        <div v-for="(pile, teamId) in score">
+            {{ teamName(teamId) }} => {{ pile.length }}
         </div>
         <h4>The Winner of the phase is:</h4>
         <h2>{{ teamName(phaseWinner(teams)) }}</h2>

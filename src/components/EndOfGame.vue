@@ -2,8 +2,8 @@
     <div>
         <div v-for="(score, index) in finalScore">
             <h2>Phase {{ index + 1 }}</h2>
-            <div v-for="(pile, team) in score">
-                {{ teamName(team) }} => {{ pile.length }}
+            <div v-for="(pile, teamId) in score">
+                {{ teamName(teamId) }} => {{ pile.length }}
             </div>
         </div>
         <h4>The winner of the game is:</h4>
