@@ -8,6 +8,7 @@
             <label for="nbTeamsInput">Number of Teams</label>
             <input id="nbTeamsInput" type="number" v-model="nbTeams">
         </p>
+        <!--
         <p>
             <label>Difficulty</label>
             <input type="radio" id="difficulty0" value="0" v-model="difficulty">
@@ -25,6 +26,10 @@
             <input type="radio" id="difficulty4" value="4" v-model="difficulty">
             <label for="difficulty4">Very Hard</label>
             <br>
+        </p>
+        -->
+        <p>
+            Soon: choose the game difficulty!
         </p>
         <p>
             <button @click="next">Player Names</button>
