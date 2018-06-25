@@ -6,14 +6,19 @@
         <p>
             <button @click="next">Continue</button>
         </p>
+        <team-background :use-timer="false"></team-background>
     </div>
 </template>
 
 <script>
   import { mapGetters } from 'vuex';
+  import TeamBackground from './TeamBackground';
 
   export default {
     name: "EndOfTurn",
+    components: {
+      TeamBackground,
+    },
     computed: {
       ...mapGetters('players', [
         'currentPlayerName',
