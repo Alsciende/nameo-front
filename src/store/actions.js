@@ -18,8 +18,12 @@ export const AppMounted = ({ commit, getters }) => {
     }
     commit('router/change', 'resume-game');
   } else {
-    commit('router/change', 'set-parameters');
+    commit('router/change', 'intro');
   }
+};
+
+export const GameLaunched = ({ commit }) => {
+  commit('router/change', 'set-parameters');
 };
 
 export const ParametersSet = ({ commit }, data) => {
@@ -129,7 +133,7 @@ export const GameEnds = ({ getters, commit }) => {
 };
 
 export const QuitGame = ({ commit }) => {
-  commit('router/change', 'set-parameters');
+  commit('router/change', 'intro');
 };
 
 export const ResumeGame = ({ commit, getters, dispatch }) => {

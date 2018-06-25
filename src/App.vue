@@ -6,6 +6,7 @@
 </template>
 
 <script>
+  import Intro from './components/Intro';
   import SetParameters from './components/SetParameters';
   import SetPlayerNames from './components/SetPlayerNames';
   import SetPlayerTeams from './components/SetPlayerTeams';
@@ -21,6 +22,7 @@
   export default {
     name: 'app',
     components: {
+      Intro,
       SetParameters,
       SetPlayerNames,
       SetPlayerTeams,
