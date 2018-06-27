@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div class="jumbotron">
         <h1>Nameo</h1>
-        <h2>Le jeu du chapeau</h2>
+        <p class="lead">Le jeu du chapeau</p>
         <p>
             Faites deviner un maximum de noms célèbres à votre équipe
         </p>
@@ -14,7 +14,7 @@
             <li>On mime !</li>
         </ol>
         <p>
-            <button @click="next">Commencer</button>
+            <button @click="next" type="button" class="btn btn-primary btn-lg">Commencer</button>
         </p>
     </div>
 </template>
