@@ -97,7 +97,7 @@ const mutations = {
     state.teamOrder = shuffle(keys(state.teams));
     state.playerOrder = mapValues(
       state.teams,
-      (team, teamId) => shuffle(teamPlayers(state)(teamId))
+      (team, teamId) => shuffle(teamPlayers(state)(teamId)),
     );
   },
   next(state) {
