@@ -45,17 +45,17 @@
 </script>
 
 <style>
-    @import url('https://fonts.googleapis.com/css?family=Josefin+Sans|Roboto');
-    body {
-        font-family: 'Roboto', sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        color: #2d3436;
-        background-color: #dfe6e9;
-    }
-    #app {
-        text-align: center;
-    }
+    @import url('https://fonts.googleapis.com/css?family=Josefin+Sans|Roboto|Material+Icons');
+    /*body {*/
+        /*font-family: 'Roboto', sans-serif;*/
+        /*-webkit-font-smoothing: antialiased;*/
+        /*-moz-osx-font-smoothing: grayscale;*/
+        /*color: #2d3436;*/
+        /*background-color: #dfe6e9;*/
+    /*}*/
+    /*#app {*/
+        /*text-align: center;*/
+    /*}*/
     h1, h2, h3, h4, h5 {
         font-family: 'Josefin Sans', sans-serif;
     }
