@@ -2,9 +2,9 @@
     <div>
         <h2>C'est le tour de</h2>
         <h1>{{ currentPlayerName }}</h1>
-        <h4>Nom à faire deviner</h4>
+        <p>Nom à faire deviner</p>
         <h2>{{ getCurrentCardName }}</h2>
-        <h4>Timer</h4>
+        <p>Timer</p>
         <h2>{{ timer }}</h2>
         <p>
             <button @click="success">Réussi</button>

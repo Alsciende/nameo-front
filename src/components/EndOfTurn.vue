@@ -2,8 +2,8 @@
     <div>
         <h2>C'est la fin du tour de</h2>
         <h1>{{ currentPlayerName }}</h1>
-        <h3>Réussis: {{ won.length }} noms</h3>
-        <h3>Échoués: {{ lost.length }} noms</h3>
+        <p>Réussis: {{ won.length }} noms</p>
+        <p>Échoués: {{ lost.length }} noms</p>
         <p>
             <button @click="next">Suite</button>
         </p>

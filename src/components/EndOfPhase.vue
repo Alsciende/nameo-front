@@ -6,7 +6,7 @@
             <td>{{ teamName(teamId) }}</td><td>{{ pile.length }}</td>
         </tr>
         </table>
-        <h4>La victoire revient à</h4>
+        <p>La victoire revient à</p>
         <h2>{{ teamName(phaseWinner(teams)) }} !</h2>
         <p>
             <button @click="next">Suite</button>

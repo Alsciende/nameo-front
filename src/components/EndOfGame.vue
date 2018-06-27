@@ -9,7 +9,7 @@
             </div>
         </div>
         -->
-        <h4>La victoire finale revient à</h4>
+        <p>La victoire finale revient à</p>
         <h2>{{ teamName(gameWinner(teams)) }} !!</h2>
         <p>
             <button @click="next">Nouvelle partie</button>

@@ -2,7 +2,7 @@
     <div>
         <h1>Joueurs</h1>
         <p v-for="(player, playerId, index) in players">
-            <label :for="playerId">Joueur n°{{ index+1 }}</label>
+            <label :for="playerId">Joueur n°{{ index+1 }}</label><br/>
             <input :id="playerId" v-model="names[playerId]" required>
         </p>
         <p>
