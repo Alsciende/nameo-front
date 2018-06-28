@@ -14,7 +14,7 @@
             <li>On mime !</li>
         </ol>
         <p>
-            <button @click="next">Commencer</button>
+            <button @click="next" class="button is-primary">Commencer</button>
         </p>
     </div>
 </template>
