@@ -5,7 +5,7 @@
             <div class="field" v-for="(player, playerId, index) in players">
                 <label class="label" :for="playerId">Joueur n°{{ index+1 }}</label>
                 <div class="control has-text-centered">
-                    <input :id="playerId" v-model="names[playerId]" required>
+                    <input :id="playerId" v-model="names[playerId]" required class="input">
                 </div>
             </div>
             <p>
