@@ -77,6 +77,9 @@ export const CardIsWon = ({ dispatch, commit, getters }) => {
 };
 
 export const CardIsLost = ({ dispatch, commit, getters }) => {
+  if (getters['phases/current'] === 1) {
+    commit('timer/forward', 3);
+  }
   commit('attempts/add', new Attempt(getters, 1));
   commit('cards/failure');
   commit('cards/next');

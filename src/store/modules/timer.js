@@ -42,6 +42,22 @@ const mutations = {
   clear(state) {
     window.clearInterval(state.intervalID);
   },
+  /**
+   * Adds a number of seconds to the elapsed time on the timer, shortening it
+   * @param state
+   * @param seconds
+   */
+  forward(state, seconds) {
+    state.startedAt -= 1000 * seconds;
+  },
+  /**
+   * Removes a number of seconds to the elapsed time on the timer, lengthening it
+   * @param state
+   * @param seconds
+   */
+  rewind(state, seconds) {
+    state.startedAt += 1000 * seconds;
+  },
 };
 
 export default {
