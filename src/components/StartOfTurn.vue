@@ -1,12 +1,14 @@
 <template>
-    <div>
-        <h2>C'est le tour de</h2>
-        <h1>{{ currentPlayerName }}</h1>
-        <p>
-            <button @click="startTurn">Lancer le timer</button>
-        </p>
+    <section class="section">
+        <div class="container has-text-centered">
+            <h2 class="subtitle">C'est le tour de</h2>
+            <h1 class="title">{{ currentPlayerName }}</h1>
+            <p>
+                <button @click="startTurn" class="button is-primary">Lancer le timer</button>
+            </p>
+        </div>
         <team-background :use-timer="false"></team-background>
-    </div>
+    </section>
 </template>
 
 <script>

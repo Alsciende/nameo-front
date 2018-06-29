@@ -1,14 +1,21 @@
 <template>
-    <div>
-        <h2>C'est la fin du tour de</h2>
-        <h1>{{ currentPlayerName }}</h1>
-        <p>Réussis: {{ won.length }} noms</p>
-        <p>Échoués: {{ lost.length }} noms</p>
-        <p>
-            <button @click="next">Suite</button>
-        </p>
+    <section class="section">
+        <div class="container has-text-centered">
+            <h2 class="subtitle">C'est la fin du tour de</h2>
+            <h1 class="title">{{ currentPlayerName }}</h1>
+            <table class="table is-striped is-fullwidth">
+                <thead><tr><th>Noms</th><th>Nombre</th></tr></thead>
+                <tbody>
+                <tr><td>Réussis</td><td>{{ won.length }}</td></tr>
+                <tr><td>Échoués</td><td>{{ lost.length }}</td></tr>
+                </tbody>
+            </table>
+            <p>
+                <button @click="next" class="button is-primary">Suite</button>
+            </p>
+        </div>
         <team-background :use-timer="false"></team-background>
-    </div>
+    </section>
 </template>
 
 <script>

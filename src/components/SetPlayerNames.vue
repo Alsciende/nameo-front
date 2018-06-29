@@ -1,14 +1,18 @@
 <template>
-    <div>
-        <h1>Joueurs</h1>
-        <p v-for="(player, playerId, index) in players">
-            <label :for="playerId">Joueur n°{{ index+1 }}</label><br/>
-            <input :id="playerId" v-model="names[playerId]" required>
-        </p>
-        <p>
-            <button @click="next">Équipes</button>
-        </p>
-    </div>
+    <section class="section">
+        <div class="container has-text-centered">
+            <h2 class="title">Joueurs</h2>
+            <div class="field" v-for="(player, playerId, index) in players">
+                <label class="label" :for="playerId">Joueur n°{{ index+1 }}</label>
+                <div class="control has-text-centered">
+                    <input :id="playerId" v-model="names[playerId]" required>
+                </div>
+            </div>
+            <p>
+                <button @click="next" class="button is-primary">Équipes</button>
+            </p>
+        </div>
+    </section>
 </template>
 
 <script>
