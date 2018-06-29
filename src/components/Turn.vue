@@ -4,12 +4,12 @@
             <h2 class="subtitle">C'est le tour de</h2>
             <h1 class="title">{{ currentPlayerName }}</h1>
             <p>Nom à faire deviner</p>
-            <h2 class="subtitle">{{ getCurrentCardName }}</h2>
+            <h2 class="title">{{ getCurrentCardName }}</h2>
             <p>Timer</p>
-            <h2 class="subtitle">{{ timer }}</h2>
+            <h2 class="title">{{ timer }}</h2>
             <div class="buttons is-centered">
-                <button @click="success" class="button is-success">Réussi</button>
-                <button @click="failure" class="button is-danger">Échoué</button>
+                <button @click="success" class="button is-success is-rounded is-medium">Réussi</button>
+                <button @click="failure" class="button is-danger is-rounded is-medium">Échoué</button>
             </div>
         </div>
         <team-background :use-timer="true"></team-background>
