@@ -1,17 +1,19 @@
 <template>
-    <div>
-        <h2>C'est le tour de</h2>
-        <h1>{{ currentPlayerName }}</h1>
-        <p>Nom à faire deviner</p>
-        <h2>{{ getCurrentCardName }}</h2>
-        <p>Timer</p>
-        <h2>{{ timer }}</h2>
-        <p>
-            <button @click="success">Réussi</button>
-            <button @click="failure">Échoué</button>
-        </p>
+    <section class="section">
+        <div class="container has-text-centered">
+            <h2 class="subtitle">C'est le tour de</h2>
+            <h1 class="title">{{ currentPlayerName }}</h1>
+            <p>Nom à faire deviner</p>
+            <h2 class="subtitle">{{ getCurrentCardName }}</h2>
+            <p>Timer</p>
+            <h2 class="subtitle">{{ timer }}</h2>
+            <div class="buttons is-centered">
+                <button @click="success" class="button is-success">Réussi</button>
+                <button @click="failure" class="button is-danger">Échoué</button>
+            </div>
+        </div>
         <team-background :use-timer="true"></team-background>
-    </div>
+    </section>
 </template>
 
 <script>

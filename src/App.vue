@@ -44,22 +44,6 @@
   };
 </script>
 
-<style>
-    @import url('https://fonts.googleapis.com/css?family=Josefin+Sans|Roboto');
-    body {
-        font-family: 'Roboto', sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    }
-    #app {
-        text-align: center;
-    }
-    h1, h2, h3, h4, h5 {
-        font-family: 'Josefin Sans', sans-serif;
-    }
-</style>
-
-<style lang="sass">
-    $background: #dfe6e9;
-    @import '../node_modules/bulma/bulma.sass';
+<style lang="scss">
+    @import 'nameo.scss';
 </style>

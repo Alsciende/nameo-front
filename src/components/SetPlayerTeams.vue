@@ -1,16 +1,18 @@
 <template>
-    <div>
-        <h1>Équipes</h1>
-        <div v-for="(team, teamId) in teams">
-            <h2>{{ teamName(teamId) }}</h2>
-            <ul>
-                <li v-for="playerId in teamPlayers(teamId)">{{ playerName(playerId) }}</li>
-            </ul>
+    <section class="section">
+        <div class="container has-text-centered">
+            <h2 class="title">Équipes</h2>
+            <div v-for="(team, teamId) in teams">
+                <h2>{{ teamName(teamId) }}</h2>
+                <ul>
+                    <li v-for="playerId in teamPlayers(teamId)">{{ playerName(playerId) }}</li>
+                </ul>
+            </div>
+            <p>
+                <button @click="next" class="button is-primary">Lancer la partie</button>
+            </p>
         </div>
-        <p>
-            <button @click="next">Lancer la partie</button>
-        </p>
-    </div>
+    </section>
 </template>
 
 <script>

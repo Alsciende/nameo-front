@@ -1,17 +1,25 @@
 <template>
-    <div>
-        <h1>Fin de la phase {{ current }}</h1>
-        <table>
-        <tr v-for="(pile, teamId) in score">
-            <td>{{ teamName(teamId) }}</td><td>{{ pile.length }}</td>
-        </tr>
-        </table>
-        <p>La victoire revient à</p>
-        <h2>{{ teamName(phaseWinner(teams)) }} !</h2>
-        <p>
-            <button @click="next">Suite</button>
-        </p>
-    </div>
+    <section class="section">
+        <div class="container has-text-centered">
+            <h1 class="title">Fin de la phase {{ current }}</h1>
+            <table class="table is-striped is-fullwidth">
+                <thead>
+                <tr><th>Équipe</th><th>Score</th></tr>
+                </thead>
+                <tbody>
+                <tr v-for="(pile, teamId) in score">
+                    <td>{{ teamName(teamId) }}</td>
+                    <td>{{ pile.length }}</td>
+                </tr>
+                </tbody>
+            </table>
+            <p>La victoire revient à</p>
+            <h2 class="subtitle">{{ teamName(phaseWinner(teams)) }} !</h2>
+            <p>
+                <button @click="next" class="button is-primary">Suite</button>
+            </p>
+        </div>
+    </section>
 </template>
 
 <script>
